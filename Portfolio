@@ -1,0 +1,61 @@
+ChatGPT said:
+This task is about building a Stock Portfolio Tracker using Python. Based on the image, here's how you can implement it step-by-step:
+
+✅ TASK 2: Stock Portfolio Tracker
+📌 Goal:
+Build a simple stock tracker that:
+
+Accepts user input (stock names and quantities).
+
+Uses hardcoded stock prices in a dictionary.
+
+Calculates and displays total investment value.
+
+Optionally saves output to .txt or .csv.
+
+🔧 Code Example:
+python
+Copy
+Edit
+# Hardcoded stock prices
+stock_prices = {
+    "AAPL": 180,
+    "TSLA": 250,
+    "GOOG": 2700,
+    "MSFT": 330
+}
+
+# Dictionary to hold user portfolio
+portfolio = {}
+
+print("Enter stock name and quantity (type 'done' to finish):")
+while True:
+    stock = input("Stock symbol: ").upper()
+    if stock == 'DONE':
+        break
+    if stock not in stock_prices:
+        print("Stock not found in price list.")
+        continue
+    quantity = int(input("Quantity: "))
+    portfolio[stock] = quantity
+
+# Calculate total investment
+total = 0
+for stock, quantity in portfolio.items():
+    price = stock_prices[stock]
+    investment = price * quantity
+    print(f"{stock}: {quantity} shares × ${price} = ${investment}")
+    total += investment
+
+print(f"\nTotal Investment Value: ${total}")
+
+# Optional: Save to file
+save = input("Do you want to save this to a file? (yes/no): ").lower()
+if save == "yes":
+    with open("portfolio.txt", "w") as file:
+        for stock, quantity in portfolio.items():
+            price = stock_prices[stock]
+            investment = price * quantity
+            file.write(f"{stock}: {quantity} shares × ${price} = ${investment}\n")
+        file.write(f"\nTotal Investment Value: ${total}")
+    print("Portfolio saved to 'portfolio.txt'")
